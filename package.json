@@ -61,6 +61,8 @@
     "dist"
   ],
   "dependencies": {
+    "@types/lodash": "^4.14.178",
+    "@types/react-native": "^0.66.11",
     "lodash": "^4.17.21",
     "react-native": "^0.66.4"
   }

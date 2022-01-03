@@ -1,12 +1,12 @@
 import { get, has, isEmpty, isNil } from 'lodash'
-import { StyleProp, ViewStyle } from 'react-native';
+import { StyleProp, ViewStyle } from 'react-native'
 
 const fromEntries = (arr: any[]) => {
   return arr.reduce(function (acc, curr) {
-    acc[curr[0]] = curr[1];
-    return acc;
-  }, {});
-};
+    acc[curr[0]] = curr[1]
+    return acc
+  }, {})
+}
 
 const shortstylekeys = {
   numerics: {
@@ -27,7 +27,7 @@ const shortstylekeys = {
     f: 'flex',
     fg: 'flexGrow',
     fs: 'flexShrink',
-    z: 'zIndex',
+    z: 'zIndex'
   },
   literary: {
     ac: 'alignContent',
@@ -43,7 +43,7 @@ const shortstylekeys = {
     jc: 'justifyContent',
     of: 'overflow',
     pos: 'position',
-    wi: 'width',
+    wi: 'width'
   },
   combinatory: {
     b: 'bottom',
@@ -73,7 +73,7 @@ const shortstylekeys = {
     pv: 'paddingVertical',
     r: 'right',
     t: 'top',
-    w: 'width',
+    w: 'width'
   }
 }
 
@@ -84,44 +84,64 @@ const shortstylekeys = {
  *
  * Notes: Some style properties such as "width" and "height" may be seperated into both numeric (w) and literary (wi) objects until a better solution is found. This is because these properties can accept both numbers and strings. Example: { width: 100 } and { width: '100%' } would be expressed as 'w100' and 'wi100%' accordingly.
  */
-const convertshortstyles = (shortstylevalues: any) => (shortstyle?: string): StyleProp<ViewStyle> => {
-  if (isEmpty(shortstyle) || isNil(shortstyle)) {
-    return {}
+const convertshortstyles =
+  (shortstylevalues: any) =>
+  (shortstyle?: string): StyleProp<ViewStyle> => {
+    if (isEmpty(shortstyle) || isNil(shortstyle)) {
+      return {}
+    }
+    const styles = shortstyle.split(' ').reduce((acc, style) => {
+      // get everything that's NOT lowercase until the first non-lowercase-letter character
+      const styleKey = get(style.match(/[a-z]*/), '[0]', '')
+
+      // get everything after the first group of lowercase letters
+      const styleValue = get(style.match(/[^a-z].*$/), '[0]', '')
+
+      // if a shortstylevalues key was provided as a value such as Around(space-around) or L(25)
+      if (has(shortstylevalues, styleValue)) {
+        const entries = [
+          [
+            shortstylekeys.numerics[styleKey] ||
+              shortstylekeys.combinatory[styleKey] ||
+              shortstylekeys.literary[styleKey],
+            shortstylevalues[styleValue]
+          ]
+        ]
+        return { ...acc, ...fromEntries(entries) }
+      }
+
+      // if a combinatory key such as jc(justifyContent) or pos(Position) was provided
+      if (has(shortstylekeys.combinatory, styleKey)) {
+        const entries = [
+          [
+            shortstylekeys.combinatory[styleKey],
+            isNaN(styleValue)
+              ? styleValue.toLowerCase()
+              : parseFloat(styleValue)
+          ]
+        ]
+        return { ...acc, ...fromEntries(entries) }
+      }
+
+      // if a numerical key such as p(Padding) or w(Width) was provided
+      if (has(shortstylekeys.numerics, styleKey)) {
+        const entries = [
+          [shortstylekeys.numerics[styleKey], parseFloat(styleValue)]
+        ]
+        return { ...acc, ...fromEntries(entries) }
+      }
+
+      // if a literary key such as jc(justifyContent) or pos(Position) was provided
+      if (has(shortstylekeys.literary, styleKey)) {
+        const entries = [
+          [shortstylekeys.literary[styleKey], styleValue.toLowerCase()]
+        ]
+        return { ...acc, ...fromEntries(entries) }
+      }
+
+      return acc
+    }, {})
+    return styles
   }
-  const styles = shortstyle.split(' ').reduce((acc, style, i) => {
-    // get everything that's NOT lowercase until the first non-lowercase-letter character
-    const styleKey = get(style.match(/[a-z]*/), '[0]', '')
-
-    // get everything after the first group of lowercase letters
-    const styleValue = get(style.match(/[^a-z].*$/), '[0]', '')
-
-    // if a shortstylevalues key was provided as a value such as Around(space-around) or L(25)
-    if (has(shortstylevalues, styleValue)) {
-      const entries = [[shortstylekeys.numerics[styleKey] || shortstylekeys.combinatory[styleKey] || shortstylekeys.literary[styleKey], shortstylevalues[styleValue]]]
-      return { ...acc, ...fromEntries(entries), }
-    }
-
-    // if a combinatory key such as jc(justifyContent) or pos(Position) was provided
-    if (has(shortstylekeys.combinatory, styleKey)) {
-      const entries = [[shortstylekeys.combinatory[styleKey], isNaN(styleValue) ? styleValue.toLowerCase() : parseFloat(styleValue)]]
-      return { ...acc, ...fromEntries(entries), }
-    }
-
-    // if a numerical key such as p(Padding) or w(Width) was provided
-    if (has(shortstylekeys.numerics, styleKey)) {
-      const entries = [[shortstylekeys.numerics[styleKey], parseFloat(styleValue)]]
-      return { ...acc, ...fromEntries(entries), }
-    }
-
-    // if a literary key such as jc(justifyContent) or pos(Position) was provided
-    if (has(shortstylekeys.literary, styleKey)) {
-      const entries = [[shortstylekeys.literary[styleKey], styleValue.toLowerCase()]]
-      return { ...acc, ...fromEntries(entries), }
-    }
-
-    return acc;
-  }, {})
-  return styles;
-}
 
 export { convertshortstyles, shortstylekeys }

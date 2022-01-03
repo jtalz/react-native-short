@@ -1,4 +1,4 @@
-import { Dimensions } from "react-native"
+import { Dimensions } from 'react-native'
 
 const defaultshortstyles = {
   Around: 'space-around',
@@ -16,7 +16,7 @@ const defaultshortstyles = {
   M: 20,
   L: 25,
   XL: 30,
-  XXL: 35,
+  XXL: 35
 }
 
 export { defaultshortstyles }

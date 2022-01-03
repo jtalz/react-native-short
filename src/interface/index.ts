@@ -1,11 +1,11 @@
-import { ViewProps } from "react-native";
+import { ViewProps } from 'react-native'
 
 type ShortViewProps = ViewProps & {
-  shortstyle?: string;
+  shortstyle?: string
 }
 
 type ShortStyleContainerProps = {
-  customshortstyles?: any;
+  customshortstyles?: any
 }
 
 export { ShortViewProps, ShortStyleContainerProps }
