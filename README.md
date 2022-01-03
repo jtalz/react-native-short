@@ -1,30 +1,330 @@
+<img src="https://github.com/jtalz/react-native-short/blob/master/assets/logo.svg?sanitize=true" width="300" />
+
 # react-native-short
+A react-native library designed to streamline UI implementation. 
 
-> A react-native library designed to streamline UI implementation. 
+## Installation
+Add `react-native-short` to your expo or bare react native project:
 
-[![NPM](https://img.shields.io/npm/v/react-native-short.svg)](https://www.npmjs.com/package/react-native-short) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+```
+yarn add react-native-short
+npm install react-native-short
+expo install react-native-short
+```
 
-## Install
+## Quick start
+Use `react-native-short` in your code like so:
+```
+import { ShortStyleContainer, Row, Column } from 'react-native-short'
 
-```bash
-npm install --save react-native-short
+// First wrap your app with ShortStyleContainer
+
+<ShortStyleContainer>
+  <App />
+</ShortStyleContainer>
+
+// Then use Row's and Columns to your liking!
+
+<Row shortstyle='h50 w100 br10 phL bw1'>{children}</Row>
 ```
 
 ## Usage
+`react-native-short` exposes 3 react-native components. The most crucial are `Row` and `Column`. They're unique because they accept a `shortstyle` prop. Before moving on, let's review what a `shortstyle` is. 
 
-```tsx
-import React, { Component } from 'react'
+### shortstyle
+A `shortstyle` is essentially a string to be converted into a style object upon rendering. In other words, it can be used to style components more quickly during development and with less code. Let's look at an example.
 
-import MyComponent from 'react-native-short'
-import 'react-native-short/dist/index.css'
+Suppose we're creating some component similar to this one:  
 
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
+<img src="https://user-images.githubusercontent.com/31594943/147765961-30f4cb2f-361e-4778-a4f4-3df47a2de1c3.png" width="400" />
+
+
+Using traditional react-native implementation, we might write it like so: 
+```
+import { View, Text } from 'react-native'
+
+const Item = () => (
+  <View style={{ 
+    flexDirection: 'row', 
+    paddingHorizontal: 15, 
+    paddingVertical: 10, 
+    justifyContent: 'space-between', 
+    width: 300, 
+    height: 50, 
+    }}
+  >
+    <View style={{ 
+      flexDirection: 'column', 
+      justifyContent: 'flex-start', 
+      alignItems: 'flex-start' 
+      }}
+    >
+      <View style={{ flexDirection: 'row' }}>
+        <Text style={{ marginRight: 10 }}>Sports</Text>
+        <Text>- Live</Text>
+      </View>
+      <Text>Fans wish Lebron James a happy birthday</Text>
+    </View>
+    <View style={{ height: '100%' }}>
+      <ListImage ... />
+    </View>
+  </View>
+)
+```
+
+However, using react-native-short we could speed up the writing process, minimize the code load, and still understand what we've written like so: 
+```
+import { Row, Column, Text } from 'react-native-short'
+
+const Item = () => (
+  <Row shortstyle='ph15 pv10 jcBtwn w300 h50'>
+    <Column shortstyle='jcStart aiStart'>
+      <Row>
+        <Text style={{ marginRight: 10 }}>Sports</Text>
+        <Text>- Live</Text>
+      </Row>
+      <Text>Fans wish Lebron James a happy birthday</Text>
+    </Column>
+    <Column shortstyle='hFull'>
+      <ListImage ... />
+    </Column>
+  </Row>
+)
+```
+
+Did you catch that?
+
+```
+'ph15 pv10 jcBtwn w300 h50'
+```
+becomes
+```
+{ paddingHorizontal: 15, paddingVertical: 10, justifyContent: 'space-between', width: 300, height: 50 }
+```
+
+Note: Refer to [Shortstyle Reference Guide](#shortstyle-reference-guide) for a full reference on how to *shortstyle* components
+
+## Components
+
+### Row 
+A component that inherets properties from `View` and also accepts a `shortstyle` prop. It's `flex-direction` is inherently set to `row`.
+#### use case
+```
+import { Row } from 'react-native-short'
+
+const Button = ({ name, icon }) => {
+  return (
+    <Pressable>
+      <Row shortstyle="w100 h50 bcBlue br10 bw1 bocWhite">
+        <Text>{ name }</Text>
+        <Icon source={icon} />
+      </Row>
+    </Pressable>
+  )
 }
 ```
 
-## License
 
-MIT © [jtalz](https://github.com/jtalz)
+### Column
+A component that inherets properties from `View` and also accepts a `shortstyle` prop. It's `flex-direction` is inherently set to `column`.
+#### use case
+```
+import { Column } from 'react-native-short'
+
+const Card = ({ name, icon, width }) => {
+  return (
+    <Pressable>
+      <Column shortstyle={`h30 w${width} bcBlue bw1 br10`}>
+        <Text>{ name }</Text>
+        <Icon source={icon} />
+      </Column>
+    </Pressable>
+  )
+}
+```
+Note: `shortstyle` works with template literals
+
+
+
+### ShortStyleContainer (required)
+Wrap your app or other container with `ShortStyleContainer` in order to begin using `Column` and `Row` within it. This declares any custom and/or default shortstyle values to be used within. It's useful for setting things like sizing patterns.
+
+#### use case
+```
+import { ShortStyleContainer } from 'react-native-short'
+
+const customshortstyles = {
+  XS: 10,
+  S: 15,
+  M: 20,
+  L: 25,
+  XL: 30,
+  Full: '100%',
+  Half: '50%',
+  Q: '25%'
+}
+
+const App = () => {
+  <ShortStyleContainer { ...{ customshortstyles } } >
+    <NavigationContainer>
+      <RootNavigator />
+    </NavigationContainer>
+  </ShortStyleContainer>
+}
+```
+
+## Shortstyle reference guide
+
+As mentioned above, *a shortstyle is essentially a string to be converted into a style object upon rendering*. 
+
+Intuitive style key/value pairs are found within a `shortstyle` string and should be implemented in the following manner:
+```
+keyValue
+```
+
+There are 3 different types of keyValue pairs: Literary, Numerical, and Combinatory.
+
+### Literary pairs
+
+Literary pairs reference react-native styles that accept **only** a string value (ex. `justifyContent`, `alignItems`, `position`...). 
+
+They rely on camelCase and can be used in one of two ways:
+
+1. Using custom values defined in [Default short styles](#default-short-styles) or [Custom short styles](#shortstylecontainer).
+
+    ```
+    "jcBtwn" becomes { justifyContent: 'space-between' }
+    "aiCenter"
+    "posAbs"
+    ```
+2. Using any string value deemed acceptabled by react-native for that style property.
+    ```
+    "bcRed" becomes { backgroundColor: 'red' }
+    "fwWrap" becomes { flexWrap: 'wrap' }
+    ```
+    Note: the first letter of the string value becomes lowercase upon rendering so 'Red' → 'red' and 'Wrap' → 'wrap' 
+
+### Numerical pairs
+
+Numerical pairs reference react-native styles that accept **only** number values (ex. `flex`, `fontSize`...)
+
+They can be used in one of two ways:
+
+1. Using numbers following their `shortstyle` key.  
+   
+    ```
+    "f1"
+    "fs20"
+    ```
+
+2. Using custom values defined in [Default short styles](#default-short-styles) or [Custom short styles](#shortstylecontainer) that represent a numerical value.
+    ```
+    "fsL"
+    "fsS"
+    ```
+
+### Combinatory pairs
+
+Combinatory pairs are the most common and reference react-native styles that accept **both** number and string values (`width`, `height`, `margin`, `top`, `borderWidth`...)
+
+They can be used in one of two ways:
+
+1. Using numbers or any string value deemed acceptabled by react-native for that style property following their `shortstyle` key
+   
+    ```
+    "w500" becomes { width: 500 }
+    "w50%" becomes { width: '50%' }
+    "m30"
+    "bw1"
+    "bwThick"
+    ```
+2. Using custom values defined in [Default short styles](#default-short-styles) or [Custom short styles](#shortstylecontainer).
+   
+    ```
+    "mL"
+    "phXXS"
+    "wFull"
+    ```
+
+Note: Number and Combinatory pairs also accept minus '-' signs and decimals '.' 
+
+### Full table
+Below is a table of all the `shortstyle` keys available for use. 
+
+#### Literary:
+| key | style property |
+|----|----------------|
+| ac | alignContent |
+| ai | alignItems |
+| as | alignSelf |
+| bc | backgroundColor |
+| boc | borderColor |
+| d | display |
+| dir | direction |
+| fd | flexDirection |
+| fw | flexWrap |
+| he | height |
+| jc | justifyContent |
+| of | overflow |
+| pos | position |
+| wi | width |
+
+#### Numeric
+| key | style property |
+|----|----------------|
+| ar | aspectRatio |
+| bblr | borderBottomLeftRadius |
+| bbrr | borderBottomRightRadius |
+| bbw | borderBottomWidth |
+| bew | borderEndWidth |
+| blw | borderLeftWidth |
+| br | borderRadius |
+| brw | borderRightWidth |
+| bsw | borderStartWidth |
+| btlr | borderTopLeftRadius |
+| btrr | borderTopRightRadius |
+| btw | borderTopWidth |
+| bw | borderWidth |
+| e | elevation |
+| f | flex |
+| fg | flexGrow |
+| fs | flexShrink |
+| z | zIndex |
+
+#### Combinatory
+| key | style property |
+|----|----------------|
+| b | bottom |
+| en | end |
+| fb | flexBasis |
+| h | height |
+| l | left |
+| m | margin |
+| maxh | maxHeight |
+| maxW | maxWidth |
+| mb | marginBottom |
+| mh | marginHorizontal |
+| minH | minHeight |
+| minW | minWidth |
+| ml | marginLeft |
+| mr | marginRight |
+| ms | marginStart |
+| mt | marginTop |
+| mv | marginVertical |
+| o | opacity |
+| p | padding |
+| pb | paddingBottom |
+| ph | paddingHorizontal |
+| pl | paddingLeft |
+| pr | paddingRight |
+| pt | paddingTop |
+| pv | paddingVertical |
+| r | right |
+| t | top |
+| w | width |
+
+### Motivation
+The motive behind react-native short is to reduce time spent on writing out style objects. 
+
+### Contributing
+Please reach out to me at josh.tal27@gmail.com if you're interested in contributing to this project.
