@@ -1,4 +1,4 @@
-<img src="https://github.com/jtalz/react-native-short/blob/master/assets/logo.svg?sanitize=true" width="300" />
+<img src="https://github.com/jtalz/react-native-short/blob/master/src/assets/logo.svg?sanitize=true" width="300" />
 
 # react-native-short
 A react-native library designed to streamline UI implementation. 
