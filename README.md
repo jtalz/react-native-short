@@ -27,12 +27,12 @@ A react-native library designed to streamline UI implementation.
       - [Literary:](#literary)
       - [Numeric](#numeric)
       - [Combinatory](#combinatory)
-    - [Tips and tricks](#tips-and-tricks)
+  - [Tips and tricks](#tips-and-tricks)
       - [Template literals](#template-literals)
       - [Sizing](#sizing)
       - [Wrappers and containers](#wrappers-and-containers)
-    - [Motivation](#motivation)
-    - [Contributing](#contributing)
+  - [Motivation](#motivation)
+  - [Contributing](#contributing)
 ## Installation
 Add `react-native-short` to your expo or bare react native project:
 
@@ -387,15 +387,15 @@ Below is a table of all the `shortstyle` keys available for use.
 | w | width |
 
 
-### Tips and tricks
+## Tips and tricks
 
 #### Template literals
 
 #### Sizing
 
 #### Wrappers and containers
-### Motivation
+## Motivation
 The motive behind react-native short is to reduce time spent on writing out style objects. 
 
-### Contributing
+## Contributing
 Please reach out to me at josh.tal27@gmail.com if you're interested in contributing to this project.
