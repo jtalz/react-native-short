@@ -29,8 +29,7 @@ A react-native library designed to streamline UI implementation.
       - [Combinatory](#combinatory)
   - [Tips and tricks](#tips-and-tricks)
       - [Template literals](#template-literals)
-      - [Sizing](#sizing)
-      - [Wrappers and containers](#wrappers-and-containers)
+      - [Sizing and wrappers](#sizing-and-wrappers)
   - [Motivation](#motivation)
   - [Contributing](#contributing)
 ## Installation
@@ -390,10 +389,32 @@ Below is a table of all the `shortstyle` keys available for use.
 ## Tips and tricks
 
 #### Template literals
+Use template literals in place of `shortstyle` strings to place dynamic data like sizes. 
 
-#### Sizing
+```
+const GoButton = ({ width }) => {
+  return (
+    <Row shortstyle={`br10 h50 w${width}`}>
+      <Text>Go!</Text>
+    </Row>
+  )
+}
+```
 
-#### Wrappers and containers
+#### Sizing and wrappers
+It's common to use the same size horizontal or vertical padding throughout an app. Set those sizes in a [CustomShortStyles](#customshortstyles) object like the one above, pass them into the parent [ShortStyleContainer](#shortstylecontainer-required) and use them in your app like this:
+
+```
+/* I want to create a full screen wrapper, the width of the screen (Sw = Dimensions.get('screen').width), and with a paddingHorizontal of *Large* or 'L' */
+
+const ScreenWrapper = ({ children }) => {
+  return (
+    <Column shortstyle='f1 phL wSw'>
+      {children}
+    </Column>
+  )
+}
+```
 ## Motivation
 The motive behind react-native short is to reduce time spent on writing out style objects. 
 
