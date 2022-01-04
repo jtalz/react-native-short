@@ -175,7 +175,7 @@ const App = () => {
 
 #### CustomShortStyles
 
-[`ShortStyleContainer`](#short-style-container-(required)) accepts a prop called `customshortstyles`. 
+[`ShortStyleContainer`](#shortstylecontainer-(required)) accepts a prop called `customshortstyles`. 
 
 This should be an object and is a useful opportunity to set theme-like values such as sizes like `XXS, XS, S, M...`. Although, you may set it as anything you like. These may be used later in any
 type of key/value pairs. 
