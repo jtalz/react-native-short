@@ -206,8 +206,23 @@ const App = () => {
 
 [`ShortStyleContainer`](#shortstylecontainer-(required)) accepts a prop called `customshortstyles`. 
 
-This should be an object and is a useful opportunity to set theme-like values such as sizes like `XXS, XS, S, M...`. Although, you may set it as anything you like. These may be used later in any
+This should be an object and is a useful opportunity to get creative, customize, and set theme-like values such as sizes like `XXS, XS, S, M...`. Although, you may set it as anything you like. These may be used later in any
 type of key/value pairs. 
+
+Here's an example `customshortstyles` object: 
+
+```
+const customshortstyles = {
+  XXS: 1, // Extra-Extra-Small is 1
+  XS: 3, 
+  S: 5, 
+  M: 10,
+  L: 30, // Large is 30
+  Full: '100%', // Full is '100%' and can be used on any acceptable literary and/or combinatory type key/value pairs
+  Half: '50%',
+  Q: '25%'
+}
+```
 
 **Note: All keys MUST begin with a capital letter or they wont work!**
 
