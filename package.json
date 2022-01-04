@@ -4,9 +4,6 @@
   "description": "A react-native library designed to streamline UI implementation. ",
   "author": "jtalz",
   "license": "MIT",
-  "publishConfig": {
-    "registry":"https://npm.pkg.github.com"
-  },
   "repository": "git://github.com/jtalz/react-native-short.git",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
