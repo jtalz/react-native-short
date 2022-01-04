@@ -180,6 +180,30 @@ const App = () => {
 This should be an object and is a useful opportunity to set theme-like values such as sizes like `XXS, XS, S, M...`. Although, you may set it as anything you like. These may be used later in any
 type of key/value pairs. 
 
+#### DefaultShortStyles
+The package starts out with some default shortstyles which can be used right away.
+
+```
+const defaultshortstyles = {
+  Around: 'space-around',
+  Center: 'center',
+  Btwn: 'space-between',
+  Start: 'flex-start',
+  End: 'flex-end',
+  Abs: 'absolute',
+  Full: '100%',
+  Sh: Dimensions.get('screen').height,
+  Sw: Dimensions.get('screen').width,
+  XXS: 5,
+  XS: 10,
+  S: 15,
+  M: 20,
+  L: 25,
+  XL: 30,
+  XXL: 35
+}
+```
+
 ## Shortstyle reference guide
 
 As mentioned above, *a shortstyle is essentially a string to be converted into a style object upon rendering*. 
@@ -197,7 +221,7 @@ Literary pairs reference react-native styles that accept **only** a string value
 
 They rely on camelCase and can be used in one of two ways:
 
-1. Using custom values defined in [Default short styles](#default-short-styles) or [Custom short styles](#shortstylecontainer).
+1. Using custom values defined in [Default short styles](#defaultshortstyles) or [Custom short styles](#customshortstyles).
 
     ```
     "jcBtwn" becomes { justifyContent: 'space-between' }
@@ -224,7 +248,7 @@ They can be used in one of two ways:
     "fs20"
     ```
 
-2. Using custom values defined in [Default short styles](#default-short-styles) or [Custom short styles](#shortstylecontainer) that represent a numerical value.
+2. Using custom values defined in [Default short styles](#defaultshortstyles) or [Custom short styles](#customshortstyles) that represent a numerical value.
     ```
     "fsL"
     "fsS"
@@ -245,7 +269,7 @@ They can be used in one of two ways:
     "bw1"
     "bwThick"
     ```
-2. Using custom values defined in [Default short styles](#default-short-styles) or [Custom short styles](#shortstylecontainer).
+2. Using custom values defined in [Default short styles](#defaultshortstyles) or [Custom short styles](#customshortstyles).
    
     ```
     "mL"
