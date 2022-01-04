@@ -3,6 +3,36 @@
 # react-native-short
 A react-native library designed to streamline UI implementation. 
 
+## Table of contents
+- [react-native-short](#react-native-short)
+  - [Table of contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Quick start](#quick-start)
+  - [Usage](#usage)
+    - [shortstyle](#shortstyle)
+  - [Components](#components)
+    - [Row](#row)
+      - [use case](#use-case)
+    - [Column](#column)
+      - [use case](#use-case-1)
+    - [ShortStyleContainer (required)](#shortstylecontainer-required)
+      - [use case](#use-case-2)
+      - [CustomShortStyles](#customshortstyles)
+      - [DefaultShortStyles](#defaultshortstyles)
+  - [Shortstyle reference guide](#shortstyle-reference-guide)
+    - [Literary pairs](#literary-pairs)
+    - [Numerical pairs](#numerical-pairs)
+    - [Combinatory pairs](#combinatory-pairs)
+    - [Full table](#full-table)
+      - [Literary:](#literary)
+      - [Numeric](#numeric)
+      - [Combinatory](#combinatory)
+    - [Tips and tricks](#tips-and-tricks)
+      - [Template literals](#template-literals)
+      - [Sizing](#sizing)
+      - [Wrappers and containers](#wrappers-and-containers)
+    - [Motivation](#motivation)
+    - [Contributing](#contributing)
 ## Installation
 Add `react-native-short` to your expo or bare react native project:
 
@@ -356,6 +386,14 @@ Below is a table of all the `shortstyle` keys available for use.
 | t | top |
 | w | width |
 
+
+### Tips and tricks
+
+#### Template literals
+
+#### Sizing
+
+#### Wrappers and containers
 ### Motivation
 The motive behind react-native short is to reduce time spent on writing out style objects. 
 
