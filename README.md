@@ -180,6 +180,8 @@ const App = () => {
 This should be an object and is a useful opportunity to set theme-like values such as sizes like `XXS, XS, S, M...`. Although, you may set it as anything you like. These may be used later in any
 type of key/value pairs. 
 
+**Note: All keys MUST begin with a capital letter or they wont work!**
+
 #### DefaultShortStyles
 The package starts out with some default shortstyles which can be used right away.
 
