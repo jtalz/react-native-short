@@ -78,14 +78,20 @@ const shortstylekeys = {
 }
 
 /**
- * Converts a string into a style object
- * @param bootstrap
- * @returns {StyleProp<ViewStyle>} a literal object containing react-native style key/value pairs
  *
- * Notes: Some style properties such as "width" and "height" may be seperated into both numeric (w) and literary (wi) objects until a better solution is found. This is because these properties can accept both numbers and strings. Example: { width: 100 } and { width: '100%' } would be expressed as 'w100' and 'wi100%' accordingly.
+ *
+ * @param shortstylevalues
+ * @returns a function that will convert a shortstyle - string into a literal object containing react-native styles
+ *
+ *
  */
 const convertshortstyles =
   (shortstylevalues: any) =>
+  /**
+   *
+   * @param shortstyle
+   * @returns {StyleProp<ViewStyle>} a literal object containing react-native style key/value pairs
+   */
   (shortstyle?: string): StyleProp<ViewStyle> => {
     if (isEmpty(shortstyle) || isNil(shortstyle)) {
       return {}
