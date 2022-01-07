@@ -1,14 +1,16 @@
 {
   "name": "react-native-short",
-  "version": "1.0.21",
+  "version": "1.0.23",
   "description": "A react-native library designed to streamline UI implementation. ",
   "author": "jtalz",
   "license": "MIT",
-  "repository": "git://github.com/jtalz/react-native-short.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jtalz/react-native-short.git"
+  },
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
-  "source": "src/index.js",
-  "react-native": "src/index.ts",
+  "source": "dist/index.js",
   "engines": {
     "node": ">=10"
   },
