@@ -1,4 +1,7 @@
+<figure>
 <img src="https://github.com/jtalz/react-native-short/blob/master/src/assets/logo.svg?sanitize=true" width="300" />
+<figcaption align = "center"><b>Original Facebook React.js logo modified and used in the above image.</b><br><b>[React](https://github.com/facebook/react/blob/main/LICENSE)</b></figcaption>
+</figure>
 
 # react-native-short
 A react-native library designed to streamline UI implementation. 
