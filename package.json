@@ -1,13 +1,14 @@
 {
   "name": "react-native-short",
-  "version": "1.0.1",
+  "version": "1.0.21",
   "description": "A react-native library designed to streamline UI implementation. ",
   "author": "jtalz",
   "license": "MIT",
   "repository": "git://github.com/jtalz/react-native-short.git",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
-  "source": "src/index.tsx",
+  "source": "src/index.js",
+  "react-native": "src/index.ts",
   "engines": {
     "node": ">=10"
   },
@@ -23,9 +24,6 @@
     "predeploy": "cd example && yarn install && yarn run build",
     "deploy": "gh-pages -d example/build"
   },
-  "peerDependencies": {
-    "react": "^16.0.0"
-  },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -34,6 +32,7 @@
     "@types/node": "^12.12.38",
     "@types/react": "^16.9.27",
     "@types/react-dom": "^16.9.7",
+    "@types/react-native": "^0.66.11",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
     "babel-eslint": "^10.0.3",
@@ -54,6 +53,7 @@
     "prettier": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-native": "^0.66.4",
     "react-scripts": "^3.4.1",
     "typescript": "^3.7.5"
   },
@@ -62,8 +62,6 @@
   ],
   "dependencies": {
     "@types/lodash": "^4.14.178",
-    "@types/react-native": "^0.66.11",
-    "lodash": "^4.17.21",
-    "react-native": "^0.66.4"
+    "lodash": "^4.17.21"
   }
 }
